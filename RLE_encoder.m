@@ -1,12 +1,7 @@
-function Ie = RLE_encoder(Is)
-
-    % Source image dimensions
-    Is_dim = size(Is);
-    L = Is_dim(1, 1);
-    C = Is_dim(1, 2);
+function Ie = RLE_encoder(Is, L, C)
 
     % Reshape image into a 1D array
-    Is_1D = reshape(Is, L * C, 1);
+    Is_1D = reshape(Is', L * C, 1);
 
     % Array of encoded values
     Ie = zeros(1, 2);
