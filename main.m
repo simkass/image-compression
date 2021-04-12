@@ -16,14 +16,17 @@ Is_size = L * C * 8;
 
 % Choose compression algorithm
 % Lossless: RLE or Huffman
-% Lossy: 
+% Lossy:
 compression_algorithm = "Huffman";
 
-if compression_algorithm == "RLE"
-  [Ie, Ie_size] = RLE_encoder(Is, L, C);
-  Id = RLE_decoder(Ie, L, C);
-elseif compression_algorithm == "Huffman"
-  I = 0
+switch compression_algorithm
+    case "RLE"
+        [Ie, Ie_size] = RLE_encoder(Is, L, C);
+        Id = RLE_decoder(Ie, L, C);
+    case "Huffman"
+        [Ie, Ie_size, code_table] = Huffman_encoder(Is, L, C)
+    otherwise
+        disp('Compression algorithm not valid')
 end
 
 % Compression Rate
