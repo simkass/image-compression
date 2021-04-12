@@ -1,4 +1,4 @@
-function Ie = RLE_encoder(Is, L, C)
+function [Ie, Ie_size] = RLE_encoder(Is, L, C)
 
     % Reshape image into a 1D array
     Is_1D = reshape(Is', L * C, 1);
@@ -33,3 +33,6 @@ function Ie = RLE_encoder(Is, L, C)
         end
 
     end
+
+    % Encoded image size
+    Ie_size = size(Ie, 1) * 11;
