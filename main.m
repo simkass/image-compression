@@ -24,10 +24,13 @@ switch compression_algorithm
         [Ie, Ie_size] = RLE_encoder(Is, L, C);
         Id = RLE_decoder(Ie, L, C);
     case "Huffman"
-        [Ie, Ie_size, code_table] = Huffman_encoder(Is, L, C)
+        [Ie, Ie_size, coding_table] = Huffman_encoder(Is, L, C);
+        Id = Huffman_decoder(Ie, coding_table, L, C);
     otherwise
         disp('Compression algorithm not valid')
 end
+
+figure, imshow(Id, [0, 255]);
 
 % Compression Rate
 compression_rate = Ie_size / Is_size;
