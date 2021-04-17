@@ -4,6 +4,7 @@
 Is = imread("images/image3.bmp");
 figure, imshow(Is, [0, 255]);
 
+% Simpler image for rapid testing
 %Is = [12 12 10; 40 20 200; 25 40 150];
 
 % Source image dimensions
@@ -16,8 +17,8 @@ Is_size = L * C * 8;
 
 % Choose compression algorithm
 % Lossless: RLE or Huffman
-% Lossy:
-compression_algorithm = "Huffman";
+% Lossy: Uniform Scalar
+compression_algorithm = "Uniform Scalar";
 
 switch compression_algorithm
     case "RLE"
@@ -26,6 +27,8 @@ switch compression_algorithm
     case "Huffman"
         [Ie, Ie_size, coding_table] = Huffman_encoder(Is, L, C);
         Id = Huffman_decoder(Ie, coding_table, L, C);
+    case "Uniform Scalar"
+        [Ie, Ie_size] = uniform_scalar_encoder(Is, L, C, 2);
     otherwise
         disp('Compression algorithm not valid')
 end
