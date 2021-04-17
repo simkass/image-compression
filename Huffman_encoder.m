@@ -1,7 +1,7 @@
 function [Ie, Ie_size, coding_table] = Huffman_encoder(Is, L, C)
     Ie = {};
     Ie_size = 0;
-    
+
     % Get probability of occurence of each unique value in the image
     [GC, GR] = groupcounts(Is(:));
     P = GC ./ sum(GC);
@@ -14,12 +14,12 @@ function [Ie, Ie_size, coding_table] = Huffman_encoder(Is, L, C)
         coding_table{i, 1} = GR(index(i, 1), 1);
     end
 
-    % Initialize Huffman Tree
-    HT = cell(length(P), 1);
-
     %-----------------------------
     %- CREATING THE HUFFMAN TREE -
     %-----------------------------
+
+    % Initialize Huffman Tree
+    HT = cell(length(P), 1);
 
     % Fill the tree with values of 1 to 256
     for i = 1:length(P)
@@ -73,9 +73,9 @@ function [Ie, Ie_size, coding_table] = Huffman_encoder(Is, L, C)
         for j = 1:C
             % Find index in coding table
             idx = find(values == Is(i, j));
-            % Extraire le code correspondant
+            % Extract corresponding code
             Ie(i, j) = coding_table(idx, 2);
-            
+
             % Update the size of the encoded image
             Ie_size = Ie_size + size(coding_table{idx, 2}, 2);
         end
@@ -83,14 +83,15 @@ function [Ie, Ie_size, coding_table] = Huffman_encoder(Is, L, C)
     end
 
     % Add coding table to the total size
-    for i=1:size(coding_table, 1)
+    for i = 1:size(coding_table, 1)
         Ie_size = Ie_size + 8 + size(coding_table{i, 2}, 2);
     end
-    
+
     function get_codes(branch, code)
         global codes
-        % If the branch is a cell, we call the function again
-        % if not, we go inside the terminal branch and add the code
+        % If the branch is a cell, we call the function again 
+        % and add 1 or 0 to the code
+        % if not, we go inside the terminal branch and assign the code
         if isa(branch, 'cell')
             get_codes(branch{1}, [code 0]);
             get_codes(branch{2}, [code 1]);
