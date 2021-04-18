@@ -36,3 +36,10 @@ function [Ie, Ie_size] = uniform_scalar_encoder(Is, L, C, nb_codewords)
             Ie(i, j) = codeword;
         end
     end
+
+    % Size of a codeword
+    codeword_size = size(dec2bin(nb_codewords), 2);
+    % Total size of encoded image
+    Ie_size = codeword_size * L * C;
+    % Adding the size of the dictionnary (8 bits for the value + the size of the codewords)
+    Ie_size = Ie_size + size(dictionnary, 2) * (8 + codeword_size);
