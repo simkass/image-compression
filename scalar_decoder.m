@@ -1,4 +1,4 @@
-function Id = uniform_scalar_decoder(Ie, L, C, dictionnary)
+function Id = scalar_decoder(Ie, L, C, dictionnary)
     Id = zeros(L, C);
     for i=1:L
         for j=1:C
