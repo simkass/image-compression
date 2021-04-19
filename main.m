@@ -2,6 +2,7 @@
 % Author: Simon Kassab
 
 Is = imread("images/image3.bmp");
+Is = rgb2gray(Is);
 figure, imshow(Is, [0, 255]);
 
 % Simpler image for rapid testing
