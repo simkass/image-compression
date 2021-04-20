@@ -1,7 +1,7 @@
-function [Ie, Ie_size] = uniform_scalar_encoder(Is, L, C, nb_codewords)
+function [Ie, Ie_size, dictionnary] = uniform_scalar_encoder(Is, L, C, nb_codewords)
     % Parameters
-    min_value = min(Is(:));
-    max_value = max(Is(:));
+    min_value = 0;
+    max_value = 255;
 
     % Calculating the size of every codeword interval
     interval_range = (max_value - min_value) / nb_codewords;

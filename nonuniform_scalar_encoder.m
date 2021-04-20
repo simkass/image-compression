@@ -1,4 +1,4 @@
-function [Ie, Ie_size] = nonuniform_scalar_encoder(Is, L, C, nb_codewords)
+function [Ie, Ie_size, dictionnary] = nonuniform_scalar_encoder(Is, L, C, nb_codewords)
     % Lower limits using the Lloyd-Max Algorithm
     [lower_limits, dictionnary] = lloyds(Is(:), nb_codewords);
 

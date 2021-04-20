@@ -1,7 +1,8 @@
 % Lossy and lossless image compression techniques
 % Author: Simon Kassab
+close all
 
-Is = imread("images/image3.bmp");
+Is = imread("images/image1.bmp");
 Is = rgb2gray(Is);
 figure, imshow(Is, [0, 255]);
 
@@ -18,8 +19,8 @@ Is_size = L * C * 8;
 
 % Choose compression algorithm
 % Lossless: RLE or Huffman
-% Lossy: Uniform Scalar
-compression_algorithm = "Uniform Scalar";
+% Lossy: Uniform Scalar, Non Uniform Scalar
+compression_algorithm = "Non Uniform Scalar";
 
 switch compression_algorithm
     case "RLE"
@@ -29,9 +30,15 @@ switch compression_algorithm
         [Ie, Ie_size, coding_table] = Huffman_encoder(Is, L, C);
         Id = Huffman_decoder(Ie, coding_table, L, C);
     case "Uniform Scalar"
-        [Ie, Ie_size] = uniform_scalar_encoder(Is, L, C, 2);
+        [Ie, Ie_size, dictionnary] = uniform_scalar_encoder(Is, L, C, 16);
+        Id = scalar_decoder(Ie, L, C, dictionnary);
+        PSNR = calculate_PSNR(Is, Id, L, C);
+    case "Non Uniform Scalar"
+        [Ie, Ie_size, dictionnary] = nonuniform_scalar_encoder(Is, L, C, 16);
+        Id = scalar_decoder(Ie, L, C, dictionnary);
+        PSNR = calculate_PSNR(Is, Id, L, C);
     otherwise
-        disp('Compression algorithm not valid')
+        disp('Specified compression algorithm not valid')
 end
 
 figure, imshow(Id, [0, 255]);

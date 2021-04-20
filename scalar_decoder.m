@@ -6,3 +6,4 @@ function Id = scalar_decoder(Ie, L, C, dictionnary)
             Id(i, j) = dictionnary(1, codeword + 1);
         end
     end
+    Id = uint8(Id);

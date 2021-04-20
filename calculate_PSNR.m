@@ -1,4 +1,4 @@
-function PSNR = calculate_PSNR(Is, Id)
+function PSNR = calculate_PSNR(Is, Id, L, C)
     max_value = max(Is(:));
 
     % Calculate Errors squared
@@ -8,4 +8,4 @@ function PSNR = calculate_PSNR(Is, Id)
     MSE = sum(errors_squared(:)) / (L * C);
 
     % Calculate PSNR
-    PSNR = 20 * log10(max_value) - 10 * log10(MSE)
+    PSNR = 20 * log10(double(max_value)) - 10 * log10(MSE);
