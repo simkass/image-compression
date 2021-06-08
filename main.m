@@ -30,12 +30,12 @@ switch compression_algorithm
         [Ie, Ie_size, coding_table] = Huffman_encoder(Is, L, C);
         Id = Huffman_decoder(Ie, coding_table, L, C);
     case "Uniform Scalar"
-        [Ie, Ie_size, dictionnary] = uniform_scalar_encoder(Is, L, C, 16);
-        Id = scalar_decoder(Ie, L, C, dictionnary);
+        [Ie, Ie_size, dictionary] = uniform_scalar_encoder(Is, L, C, 16);
+        Id = scalar_decoder(Ie, L, C, dictionary);
         PSNR = calculate_PSNR(Is, Id, L, C);
     case "Non Uniform Scalar"
-        [Ie, Ie_size, dictionnary] = nonuniform_scalar_encoder(Is, L, C, 16);
-        Id = scalar_decoder(Ie, L, C, dictionnary');
+        [Ie, Ie_size, dictionary] = nonuniform_scalar_encoder(Is, L, C, 16);
+        Id = scalar_decoder(Ie, L, C, dictionary');
         PSNR = calculate_PSNR(Is, Id, L, C);
     otherwise
         disp('Specified compression algorithm not valid')

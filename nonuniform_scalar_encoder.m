@@ -1,6 +1,6 @@
-function [Ie, Ie_size, dictionnary] = nonuniform_scalar_encoder(Is, L, C, nb_codewords)
+function [Ie, Ie_size, dictionary] = nonuniform_scalar_encoder(Is, L, C, nb_codewords)
     % Lower limits using the Lloyd-Max Algorithm
-    [lower_limits, dictionnary] = lloyds(Is(:), nb_codewords);
+    [lower_limits, dictionary] = lloyds(Is(:), nb_codewords);
 
     % Encoder
     Ie = zeros(L, C);
@@ -20,5 +20,5 @@ function [Ie, Ie_size, dictionnary] = nonuniform_scalar_encoder(Is, L, C, nb_cod
     codeword_size = size(dec2bin(nb_codewords), 2);
     % Total size of encoded image
     Ie_size = codeword_size * L * C;
-    % Adding the size of the dictionnary (8 bits for the value + the size of the codewords)
-    Ie_size = Ie_size + size(dictionnary, 2) * (8 + codeword_size);
+    % Adding the size of the dictionary (8 bits for the value + the size of the codewords)
+    Ie_size = Ie_size + size(dictionary, 2) * (8 + codeword_size);
