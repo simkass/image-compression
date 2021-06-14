@@ -2,8 +2,8 @@
 % Author: Simon Kassab
 close all
 
-Is = imread("images/image6.bmp");
-% Is = rgb2gray(Is);
+Is = imread("images/image2.bmp");
+Is = rgb2gray(Is);
 figure, imshow(Is, [0, 255]);
 
 % Simpler image for rapid testing
@@ -19,8 +19,8 @@ Is_size = L * C * 8;
 
 % Choose compression algorithm
 % Lossless: RLE or Huffman
-% Lossy: Uniform Scalar, Non Uniform Scalar
-compression_algorithm = "Uniform Scalar";
+% Lossy: Uniform Scalar, Non Uniform Scalar or Vector
+compression_algorithm = "Vector";
 
 switch compression_algorithm
     case "RLE"
@@ -36,6 +36,10 @@ switch compression_algorithm
     case "Non Uniform Scalar"
         [Ie, Ie_size, dictionary] = nonuniform_scalar_encoder(Is, L, C, 16);
         Id = scalar_decoder(Ie, L, C, dictionary');
+        PSNR = calculate_PSNR(Is, Id, L, C);
+    case "Vector"
+        [Ie, Ie_size, dictionary] = vector_encoder(Is, L, C, 2, 32, 4);
+        Id = vector_decoder(Ie, L, C, dictionary);
         PSNR = calculate_PSNR(Is, Id, L, C);
     otherwise
         disp('Specified compression algorithm not valid')
