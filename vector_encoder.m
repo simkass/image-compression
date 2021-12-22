@@ -30,13 +30,15 @@ function [Ie, Ie_size, dictionary] = vector_encoder(Is, L, C, group_size, dict_s
         % Table of associated groups of values for every dictionary value
         Pa{dict_size, 1} = [];
 
+	    % For every group of values in the source image
         for j = 1:Ig_size
             % Group of value j
             P = I_grouped(j, :);
 
             % Euclidian distance table
             euc_dist = zeros(dict_size, 1);
-
+            
+            % For every group of values in the dictionary
             for f = 1:dict_size
                 % f dictionnary value
                 D = dictionary(f, :);
