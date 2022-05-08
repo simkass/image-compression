@@ -1,4 +1,4 @@
-# image-compression
+# Introduction to Image Compression
 Lossy and lossless image compression techniques implemented in Matlab
 
-https://simonkassab.com/#/image_compression
+Article Here: https://simonkassab.com/#/image_compression
